@@ -3,13 +3,44 @@ orbs:
   ruby: circleci/ruby@0.1.2 
 
 jobs:
-  build:
+  
+  build: 
     docker:
       - image: circleci/ruby:2.6.3-stretch-node
     executor: ruby/default
     steps:
       - checkout
       - run:
-          name: Which bundler?
+          name: build dependencies
           command: bundle -v
       - ruby/bundle-install
+      -run:
+          name: build the jekyll site #to generate a static site using your text written in your favorite markup language
+          command: bundle exec jekyll build
+      -run:
+          name: notify build is finished
+          command: echo "The build is finished!"
+
+  test:
+    docker:
+      - image: circleci/ruby:2.6.3-stretch-node
+    executor: ruby/default
+    steps:
+      - checkout
+      - run:
+          name: build dependencies
+          command: bundle -v
+      - ruby/bundle-install
+      -run:
+          name: build the jekyll site #to generate a static site using your text written in your favorite markup language
+          command: bundle exec jekyll build
+      -run:
+          name: notify build is finished
+          command: echo "The build is finished!"
+      #add more test command
+      -run:
+          name: run html proofer #to test for any broken links
+          command: bundle exec htmlproofer ./_site --check-html
+      -run:
+          name: notify test is finished
+          command: echo "The test is finished!"
