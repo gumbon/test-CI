@@ -21,7 +21,7 @@ jobs:
           name: notify build is finished
           command: echo "The build is finished!"
 
-  test:
+  test: #add testing job
     docker:
       - image: circleci/ruby:2.6.3-stretch-node
     executor: ruby/default
@@ -44,3 +44,13 @@ jobs:
       - run:
           name: notify test is finished
           command: echo "The test is finished!"
+
+  workflows:
+    version: 2.1
+
+    build_and_test
+      jobs:
+        - build
+        - test:
+          requires:
+            - build
