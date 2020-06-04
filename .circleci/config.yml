@@ -2,7 +2,7 @@ version: 2.1
 executors:
   ci-executor:
     docker:
-      - image: githubtraining/ci-custom:latest
+      - image: circleci/ruby:2.6.3-stretch-node
 jobs:
   build:
     executor: ci-executor
@@ -19,7 +19,7 @@ jobs:
       - run:
           name: notify build is finished
           command: echo "The build is finished!"        
-  testlinks:
+  test2:
     executor: ci-executor
     steps:
       - checkout
@@ -50,6 +50,6 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - testlinks:
+      - test2:
           requires:
             - build
