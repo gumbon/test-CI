@@ -2,12 +2,15 @@ version: 2.1
 orbs:
   ruby: circleci/ruby@0.1.2 
 
+executors:
+  ci-executor:
+    docker:
+      - image: circleci/ruby:2.6.3-stretch-node
+
 jobs:
   
   build: 
-    docker:
-      - image: circleci/ruby:2.6.3-stretch-node
-    executor: ruby/default
+    executor: ci-executor
     steps:
       - checkout
       - run:
@@ -22,9 +25,7 @@ jobs:
           command: echo "The build is finished!"
 
   test2: #add testing job
-    docker:
-      - image: circleci/ruby:2.6.3-stretch-node
-    executor: ruby/default
+    executor: ci-executor
     steps:
       - checkout
       - run:
