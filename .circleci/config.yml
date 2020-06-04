@@ -3,7 +3,7 @@ version: 2.1
 executors:
   ci-executor:
     docker:
-      - image: githubtraining/ci-custom:latest
+      - image: circleci/ruby:2.6.3-stretch-node
 
 jobs:
   
@@ -43,12 +43,12 @@ jobs:
           name: notify test is finished
           command: echo "The test is finished!"
 
-  #workflows:
-  #  version: 2.1
+  workflows:
+    version: 2.1
 
-  #  build_and_test:
-  #    jobs:
-  #      - build
-  #      - test:
-  #        requires:
-  #          - build
+    build_and_test:
+      jobs:
+        - build
+        - test:
+          requires:
+            - build
