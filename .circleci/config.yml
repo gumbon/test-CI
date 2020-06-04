@@ -3,7 +3,6 @@ executors:
   ci-executor:
     docker:
       - image: githubtraining/ci-custom:latest
-
 jobs:
   build: 
     executor: ci-executor
@@ -18,7 +17,6 @@ jobs:
       - run:
           name: notify build is finished
           command: echo "The build is finished!"
-
  testlinks:
     executor: ci-executor
     steps:
