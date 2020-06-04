@@ -11,9 +11,11 @@ jobs:
       - run:
           name: build dependencies
           command: bundle install
+
       - run:
-          name: build the jekyll site #to generate a static site using your text written in your favorite markup language
+          name: build the jekyll site 
           command: bundle exec jekyll build
+          
       - run:
           name: notify build is finished
           command: echo "The build is finished!"
@@ -42,7 +44,7 @@ jobs:
           name: notify test is finished
           command: echo "The test is completed!"
 
-  workflows:
+workflows:
     version: 2.1
 
     build_and_test:
