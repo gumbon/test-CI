@@ -1,12 +1,10 @@
 version: 2.1
-
 executors:
   ci-executor:
     docker:
       - image: githubtraining/ci-custom:latest
 
 jobs:
-  
   build: 
     executor: ci-executor
     steps:
@@ -27,8 +25,7 @@ jobs:
       - checkout
       - run:
           name: build-2 dependencies
-          command: bundle -v
-      - ruby/bundle-install
+          command: bundle install
       - run:
           name: build-2 the jekyll site #to generate a static site using your text written in your favorite markup language
           command: bundle exec jekyll build
