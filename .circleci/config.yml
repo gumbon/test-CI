@@ -21,22 +21,22 @@ jobs:
           name: notify build is finished
           command: echo "The build is finished!"
 
-  test: #add testing job
+  test2: #add testing job
     docker:
       - image: circleci/ruby:2.6.3-stretch-node
     executor: ruby/default
     steps:
       - checkout
       - run:
-          name: build dependencies
+          name: build-2 dependencies
           command: bundle -v
       - ruby/bundle-install
       - run:
-          name: build the jekyll site #to generate a static site using your text written in your favorite markup language
+          name: build-2 the jekyll site #to generate a static site using your text written in your favorite markup language
           command: bundle exec jekyll build
       - run:
-          name: notify build is finished
-          command: echo "The build is finished!"
+          name: notify build-2 is finished
+          command: echo "The build-2 is finished!"
       #add more test command
       - run:
           name: run html proofer #to test for any broken links
@@ -45,12 +45,12 @@ jobs:
           name: notify test is finished
           command: echo "The test is finished!"
 
-  workflows:
-    version: 2.1
+  #workflows:
+  #  version: 2.1
 
-    build_and_test:
-      jobs:
-        - build
-        - test:
-          requires:
-            - build
+  #  build_and_test:
+  #    jobs:
+  #      - build
+  #      - test:
+  #        requires:
+  #          - build
