@@ -13,8 +13,7 @@ jobs:
       - checkout
       - run:
           name: build dependencies
-          command: bundle -v
-      - ruby/bundle-install
+          command: bundle install
       - run:
           name: build the jekyll site #to generate a static site using your text written in your favorite markup language
           command: bundle exec jekyll build
